@@ -1,6 +1,4 @@
-import { Navbar, NavbarBrand } from 'reactstrap';
-import Menu from './components/MenuComponent';
-import { DISHES } from './shared/dishes';
+import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { Component } from 'react';
 import Main from './components/MainComponent';
@@ -9,9 +7,10 @@ class App extends Component {
   render() {
     
     return (
-    <div>
+      <BrowserRouter><div>
       <Main/>
-    </div>
+    </div></BrowserRouter>
+    
   );
   }
   
