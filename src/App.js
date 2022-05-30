@@ -2,16 +2,23 @@ import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { Component } from 'react';
 import Main from './components/MainComponent';
+import { Provider } from 'react-redux'
+import { configureStore } from './redux/store';
+  const store = configureStore();
+
 class App extends Component {
 
   render() {
     
     return (
-      <BrowserRouter><div>
-      <Main/>
-    </div></BrowserRouter>
-    
-  );
+			<Provider store={store}>
+				<BrowserRouter>
+					<div>
+						<Main />
+					</div>
+				</BrowserRouter>
+			</Provider>
+		);
   }
   
 }
