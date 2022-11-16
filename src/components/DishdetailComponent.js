@@ -11,7 +11,7 @@ import {
 	BreadcrumbItem,
 } from "reactstrap";
 import CommentForm from './CommentForm';
-
+import { Loading } from './LoadingComponent';
 
 function RenderDish({ dish }) {
     return (
@@ -26,7 +26,7 @@ function RenderDish({ dish }) {
     );
     
 }
-function RenderComments({comments}) {
+function RenderComments({comments, addComment, dishId}) {
     return (
 			<div>
 				{comments.map((comments) => {
@@ -44,7 +44,7 @@ function RenderComments({comments}) {
 						</div>
 					);
 				})}
-				<CommentForm />
+			<CommentForm dishId={dishId} addComment={addComment} />
 			</div>
 		);
       
@@ -53,8 +53,21 @@ function RenderComments({comments}) {
 
  const DishdetailComponent = (props) => {
     
-    
-     if (props.dish != null) {
+	 if (props.isLoading) {
+		 return (<div className='container'>
+			 <div className='row'>
+				 <Loading />
+			 </div>
+			 </div>)
+	 }
+	 else if (props.errMess) {
+		 return (<div className='container'>
+			 <div className='row'>
+				 <h4>{ props.errMess }</h4>
+			 </div>
+		 </div>)
+	 }
+     else if (props.dish != null) {
          
         return (
 					<>
@@ -78,17 +91,14 @@ function RenderComments({comments}) {
 								</div>
 								<div className='mt-5 col-11 col-md-5 m-1'>
 									<h4>Comments</h4>
-									<RenderComments comments={props.comments} />
+							<RenderComments comments={props.comments}
+								addComment={props.addComment}
+								dishId={props.dish.id} />
 								</div>
 							</div>
 						</div>
 					</>
 				);
-    }
-    else {
-        return (
-            <div></div>
-        );
     }
 }
 export default  DishdetailComponent;

@@ -34,7 +34,8 @@ class CommentForm extends React.Component {
     handleSubmit(values){
             console.log("Current state"+ JSON.stringify(values));
             alert("Current state"+ JSON.stringify(values));
-    }
+			this.props.addComment(this.props.dishId, values.rating, values.author, values.comment)
+	}
     render() {
     const required = (val) => val && val.length;
     const maxLength = (len) => (val) => !val || val.length <= len;
