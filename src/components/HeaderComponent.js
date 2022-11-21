@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import {  NavItem, NavbarBrand } from 'reactstrap';
-import { Nav, Navbar, Container, Modal, ModalBody, ModalHeader, Button, Form, FormGroup, FormFeedback, FormLabel, FormControl } from "react-bootstrap";
-// import { Jumbotron } from 'react-bootstrap';
+import { Nav, Navbar,NavbarToggler, Collapse, Container, Modal, ModalBody, ModalHeader, Button, Form, FormGroup, Label } from "reactstrap";
 
 class Header extends Component  {
     constructor(props) {
@@ -20,7 +19,6 @@ class Header extends Component  {
             remember: false,
         };
       }
-
       toggleNav() {
           this.setState(
               { isNavOpen: !this.state.isNavOpen }
@@ -53,24 +51,24 @@ class Header extends Component  {
     render()
     {
         return (
-					<>
-						<Navbar
+			<>
+				<div>
+						<Navbar container="md"
 							collapseOnSelect
 							expand='md'
 							className='navbar-dark'
 							variant='light'>
-							<Container>
 								<NavbarBrand className='mr-auto' href='/'>
 									<img
-										src='assets/images/logo.png'
+										src='http://localhost:3000/assets/images/logo.png'
 										height='30'
 										width='41'
 										alt='Ristorante Con Fusion'
 									/>
 								</NavbarBrand>
-								<Navbar.Toggle aria-controls='responsive-navbar-nav' />
-								<Navbar.Collapse id='responsive-navbar-nav'>
-									<Nav className='me-auto'>
+					<NavbarToggler onClick={this.toggleNav} />
+					<Collapse isOpen={this.state.isNavOpen} navbar>
+									<Nav className='me-auto' navbar>
 										<NavItem>
 											<NavLink className='nav-link' to='/home'>
 												<span className='fa fa-home fa-lg'></span>Home
@@ -100,9 +98,9 @@ class Header extends Component  {
 											</Button>
 										</NavItem>
 									</Nav>
-								</Navbar.Collapse>
-							</Container>
-						</Navbar>
+								</Collapse>
+					</Navbar>
+				</div>
 						<div className=' jumbotron h-100 p-5 border rounded-3'>
 							<div className='container'>
 								<div className='row row-header'>
@@ -123,31 +121,31 @@ class Header extends Component  {
 							<ModalBody>
 								<Form onSubmit={this.handleLogin}>
 									<FormGroup  className="mb-3">
-										<FormLabel>Username</FormLabel>
-										<FormControl
+										<Label>Username</Label>
+										<input
 											type='text'
 											placeholder='username'
 											name='username'
 											id='username'
-											onChange={this.handleChange}></FormControl>
+											onChange={this.handleChange}></input>
 									</FormGroup>
 									<FormGroup className='mb-3'>
-										<FormLabel>Password</FormLabel>
-										<FormControl
+										<Label>Password</Label>
+										<input
 											type='password'
 											placeholder='password'
 											name='password'
 											id='password'
-											onChange={this.handleChange}></FormControl>
+											onChange={this.handleChange}></input>
 									</FormGroup>
-									<Form.Group className='mb-3' controlId='formBasicCheckbox'>
-										<Form.Check
+									<FormGroup className='mb-3' controlId='formBasicCheckbox'>
+										<check
 											type='checkbox'
 											label='Remember Me'
 											name='remember'
 											onChange={this.handleChange}
 										/>
-									</Form.Group>
+									</FormGroup>
 									<Button variant='primary' type='submit'>
 										Login
 									</Button>
@@ -159,4 +157,4 @@ class Header extends Component  {
     }
 }
 
-export default Header
+export default Header;
